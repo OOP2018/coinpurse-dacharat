@@ -1,5 +1,6 @@
 package coinpurse;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -14,11 +15,12 @@ public class MoneyUtil {
 	 * @return coin with all same currency
 	 */
 	public static List<Coin> filterByCurrency(List<Coin> coins, String currency) {
-		for(Coin c : coins) {
-			if(c.getCurrency() != currency)
-				coins.remove(c);
+		List<Coin> c = new ArrayList<Coin>(); 
+		for(Coin coin : coins) {
+			if(coin.getCurrency().equals(currency))
+				c.add(coin);
 		}
-		return coins;
+		return c;
 	}
 	
 	/**
@@ -45,10 +47,10 @@ public class MoneyUtil {
 	public static void main(String[] args) {
 		Purse p = new Purse(5);
 		p.insert(new Coin(10,"Baht"));
-		p.insert(new Coin(5, "Baht"));
+		p.insert(new Coin(5, "b"));
 		p.insert(new Coin(1, "a"));
 		p.insert(new Coin(5, "Baht"));
 		filterByCurrency(p.getMoney(), "Baht");
-		sortCoins(p.getMoney());
+		sortCoins(filterByCurrency(p.getMoney(), "Baht"));
 	}
 }
