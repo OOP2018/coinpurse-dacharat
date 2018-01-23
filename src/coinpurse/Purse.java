@@ -121,16 +121,11 @@ public class Purse {
 
 		List<Coin> tempList = new ArrayList<Coin>();
 		double amountNeededToWithdraw = amount;
-		
-		// Did we get the full amount?
-		// This code assumes you decrease amount each time you remove a coin.
-		// Your code might use some other variable for the remaining amount to
-		// withdraw.
-		if(amountNeededToWithdraw < 0) {
+
+		if (amountNeededToWithdraw < 0) {
 			return null;
 		}
 		if (amountNeededToWithdraw != 0) {
-			// failed. Don't change the contents of the purse.
 			Collections.sort(money, new Comparator<Coin>() {
 				@Override
 				public int compare(Coin o1, Coin o2) {
@@ -139,8 +134,8 @@ public class Purse {
 
 			});
 			Collections.reverse(money);
-			for(Coin c : money) {
-				if(amountNeededToWithdraw >= c.getValue()) {
+			for (Coin c : money) {
+				if (amountNeededToWithdraw >= c.getValue()) {
 					tempList.add(c);
 					amountNeededToWithdraw = amountNeededToWithdraw - c.getValue();
 				}
@@ -148,13 +143,8 @@ public class Purse {
 
 		}
 
-		// Success.
-		// Remove the coins you want to withdraw from purse,
-		// and return them as an array.
-		// Use list.toArray( array[] ) to copy a list into an array.
-		// toArray returns a reference to the array itself.
-		if(amountNeededToWithdraw == 0) {
-			for(Coin c : tempList) {
+		if (amountNeededToWithdraw == 0) {
+			for (Coin c : tempList) {
 				money.remove(c);
 			}
 			Coin[] array = new Coin[tempList.size()];
@@ -167,7 +157,7 @@ public class Purse {
 	public List<Coin> getMoney() {
 		return money;
 	}
-	
+
 	/**
 	 * toString returns a string description of the purse contents. It can
 	 * return whatever is a useful description.
@@ -175,13 +165,6 @@ public class Purse {
 	public String toString() {
 		return count() + " coins with value " + getBalance();
 	}
-	
-//	public static void main(String[] args) {
-//		Purse p = new Purse(5);
-//		p.insert(new Coin(1));
-//		p.insert(new Coin(0.5));
-//		p.insert(new Coin(5));
-//		System.out.println(p.getBalance());
-//	}
+
 
 }

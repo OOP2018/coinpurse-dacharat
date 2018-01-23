@@ -44,10 +44,11 @@ public class MoneyUtil {
 	
 	public static void main(String[] args) {
 		Purse p = new Purse(5);
-		p.insert(new Coin(10));
-		p.insert(new Coin(5));
-		p.insert(new Coin(1));
-		p.insert(new Coin(5));
+		p.insert(new Coin(10,"Baht"));
+		p.insert(new Coin(5, "Baht"));
+		p.insert(new Coin(1, "a"));
+		p.insert(new Coin(5, "Baht"));
+		filterByCurrency(p.getMoney(), "Baht");
 		sortCoins(p.getMoney());
 	}
 }
