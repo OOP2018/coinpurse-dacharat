@@ -3,6 +3,7 @@ package coinpurse;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class MoneyUtil {
@@ -14,9 +15,9 @@ public class MoneyUtil {
 	 * @param currency of money
 	 * @return coin with all same currency
 	 */
-	public static List<Coin> filterByCurrency(List<Coin> coins, String currency) {
-		List<Coin> c = new ArrayList<Coin>(); 
-		for(Coin coin : coins) {
+	public static List<Valuable> filterByCurrency(List<Valuable> coins, String currency) {
+		List<Valuable> c = new ArrayList<Valuable>(); 
+		for(Valuable coin : coins) {
 			if(coin.getCurrency().equals(currency))
 				c.add(coin);
 		}
@@ -28,8 +29,8 @@ public class MoneyUtil {
 	 * 
 	 * @param coins
 	 */
-	public static void printList(List<Coin> coins) {
-		for(Coin c: coins) {
+	public static void printList(List<Valuable> coins) {
+		for(Valuable c: coins) {
 			System.out.println(c);
 		}
 	}
@@ -39,8 +40,18 @@ public class MoneyUtil {
 	 * 
 	 * @param coins
 	 */
-	public static void sortCoins(List<Coin> coins) {
-		Collections.sort(coins);
+	public static void sortCoins(List<Valuable> coins) {
+		Collections.sort(coins, new Comparator<Valuable>() {
+
+			@Override
+			public int compare(Valuable o1, Valuable o2) {
+				if(o1.getValue() < o2.getValue())
+					return -1;
+				else if(o1.getValue() > o2.getValue())
+					return 1;
+				return 0;
+			}
+		});
 		printList(coins);
 	}
 	

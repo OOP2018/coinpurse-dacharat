@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @author Dacharat Pankong
  *
  */
-public class Coin implements Comparable<Coin> {
+public class Coin implements Comparable<Coin>, Valuable {
 
 	private double value;
 	private String currency;
@@ -41,26 +41,8 @@ public class Coin implements Comparable<Coin> {
 			this.value = 0;
 		}
 		this.currency = currency;
-	}
-
-	/**
-	 * return value of money
-	 *  
-	 * @return value of money
-	 */
-	public double getValue() {
-		return value;
-	}
-
-	/**
-	 * return currency of money
-	 * 
-	 * @return currency of money
-	 */
-	public String getCurrency() {
-		return currency;
-	}
-
+	}	
+	
 	/**
 	 * check coin that they are equal or not
 	 * 
@@ -96,6 +78,28 @@ public class Coin implements Comparable<Coin> {
 	@Override
 	public String toString() {
 		return String.format("%f - %s", value, currency);
+	}
+
+
+	/**
+	 * return value of money
+	 *  
+	 * @return value of money
+	 */
+	@Override
+	public double getValue() {
+		return value;
+	}
+
+
+	/**
+	 * return currency of money
+	 * 
+	 * @return currency of money
+	 */
+	@Override
+	public String getCurrency() {
+		return currency;
 	}
 
 }

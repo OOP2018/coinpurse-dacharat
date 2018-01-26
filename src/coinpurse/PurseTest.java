@@ -122,10 +122,10 @@ public class PurseTest {
 		double [] values = {1, 20, 0.5, 10}; // values of coins we will insert
 		
 		for(double value : values) {
-			Coin coin = makeCoin(value);
+			Valuable coin = makeCoin(value);
 			assertTrue(purse.insert(coin));
 			assertEquals(value,  purse.getBalance(), TOL);
-			Coin [] result = purse.withdraw(value);
+			Valuable [] result = purse.withdraw(value);
 			assertTrue( result != null );
 			assertEquals( 1, result.length );
 			assertSame(  coin, result[0] ); // should be same object
@@ -146,11 +146,11 @@ public class PurseTest {
 		double amount2 = coins[0].getValue() + coins[2].getValue();
 		assertEquals(amount1+amount2, purse.getBalance(), TOL );
 		
-		Coin [] wd1 = purse.withdraw(amount1);
+		Valuable [] wd1 = purse.withdraw(amount1);
 		assertEquals(amount1, sum(wd1), TOL );
 		
 		assertEquals(amount2, purse.getBalance(), TOL );
-		Coin [] wd2 = purse.withdraw(amount2);
+		Valuable [] wd2 = purse.withdraw(amount2);
 		
 		// should be empty now
 		assertEquals(0, purse.getBalance(), TOL );
@@ -176,7 +176,7 @@ public class PurseTest {
 			}
 			// balance should be exactly what we just inserted
  			// can we withdraw it all?
-			Coin[] result = purse.withdraw(amount);
+			Valuable[] result = purse.withdraw(amount);
 			String errmsg = String.format("couldn't withdraw %.2f but purse has %s",
 					amount, Arrays.toString(subList.toArray()) );
 			assertNotNull( errmsg, result );
@@ -205,10 +205,10 @@ public class PurseTest {
 	 * @param coins array of coins
 	 * @return sum of values of the coins
 	 */
-	private double sum(Coin[] coins)  {
+	private double sum(Valuable[] coins)  {
 		if (coins == null) return 0.0;
 		double sum = 0;
-		for(Coin c: coins) if (c != null) sum += c.getValue();
+		for(Valuable c: coins) if (c != null) sum += c.getValue();
 		return sum;
 	}
 }
