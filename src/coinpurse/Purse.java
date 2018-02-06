@@ -12,11 +12,13 @@ import java.util.List;
  * A coin purse contains coins. You can insert coins, withdraw money, check the
  * balance, and check if the purse is full.
  * 
- * @author your name
+ * @author Dacharat Pankong
  */
 public class Purse {
 	/** Collection of objects in the purse. */
 	private List<Valuable> money;
+	private Comparator<Valuable> com = new ValueComparator();
+
 
 	/**
 	 * Capacity is maximum number of items the purse can hold. Capacity is set when
@@ -74,17 +76,15 @@ public class Purse {
 	 * @return true if purse is full.
 	 */
 	public boolean isFull() {
-		if (money.size() == capacity)
-			return true;
-		return false;
+		return money.size() == capacity;
 	}
 
 	/**
-	 * Insert a coin into the purse. The coin is only inserted if the purse has
-	 * space for it and the coin has positive value. No worthless coins!
+	 * Insert a coin or banknote into the purse. The money is only inserted if the purse has
+	 * space for it and the money has positive value. No worthless coins!
 	 * 
 	 * @param coin
-	 *            is a Coin object to insert into purse
+	 *            is a Coin or Banknote object to insert into purse
 	 * @return true if coin inserted, false if can't insert
 	 */
 	public boolean insert(Valuable coin) {
@@ -120,8 +120,7 @@ public class Purse {
 
 		List<Valuable> tempList = new ArrayList<Valuable>();
 		double amountNeededToWithdraw = amount;
-		Comparator<Valuable> com = new ValueComparator();
-
+		
 		if (amountNeededToWithdraw < 0) {
 			return null;
 		}

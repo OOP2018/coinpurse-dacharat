@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @author Dacharat Pankong
  *
  */
-public class Coin implements Comparable<Coin>, Valuable {
+public class Coin implements Comparable<Valuable>, Valuable {
 
 	private double value;
 	private String currency;
@@ -67,7 +67,7 @@ public class Coin implements Comparable<Coin>, Valuable {
 	 * 
 	 */
 	@Override
-	public int compareTo(Coin coin) {
+	public int compareTo(Valuable coin) {
 
 		return (int) Math.signum(this.getValue() - coin.getValue());
 	}

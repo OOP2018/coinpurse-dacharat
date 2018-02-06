@@ -6,6 +6,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Some Money utility methods for practice using Lists and Comparator.
+ * 
+ * @author Dacharat Pankong
+ *
+ */
 public class MoneyUtil {
 
 	/**

@@ -61,7 +61,7 @@ public class BankNote implements Valuable {
 		if (obj.getClass() != this.getClass())
 			return false;
 		BankNote other = (BankNote) obj;
-		return this.value == other.value && this.currency == other.currency;
+		return this.value == other.value && this.currency.equalsIgnoreCase(other.getCurrency());
 	}
 
 	/**
