@@ -24,6 +24,17 @@ public class BankNote extends Money  {
 	}
 
 	/**
+	 * Create banknote for collect money.
+	 * 
+	 * @param value
+	 * @param currency
+	 * @param serialNumer
+	 */
+	public BankNote(double value, String currency, long serialNumer) {
+		super(value, currency);
+		this.serialNumber = serialNumer;
+	}
+	/**
 	 * Return serial number of banknote.
 	 * 
 	 * @return serial number of banknote.

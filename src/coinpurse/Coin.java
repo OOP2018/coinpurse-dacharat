@@ -8,12 +8,13 @@ import java.util.ArrayList;
  * @author Dacharat Pankong
  *
  */
-public class Coin extends Money  {
+public class Coin extends Money {
 
 	/**
 	 * Create a coin with value
 	 * 
-	 * @param value is value of money
+	 * @param value
+	 *            is value of money
 	 */
 	public Coin(double value) {
 
@@ -23,20 +24,24 @@ public class Coin extends Money  {
 	/**
 	 * Create a coin with value and currency
 	 * 
-	 * @param value is value of money
-	 * @param currency is currency of money
+	 * @param value
+	 *            is value of money
+	 * @param currency
+	 *            is currency of money
 	 */
 	public Coin(double value, String currency) {
 
 		super(value, currency);
-	}	
+	}
 
 	/**
 	 * toString returns a string description of coin.
 	 */
 	@Override
 	public String toString() {
-		return String.format("%f - %s", value, currency);
+		if (currency.equals("Ringgit"))
+			return String.format("%.2f - %s coin", value * 100, "Sen");
+		return String.format("%.2f - %s coin", value, currency);
 	}
 
 }
