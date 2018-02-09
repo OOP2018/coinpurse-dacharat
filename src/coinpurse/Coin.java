@@ -8,10 +8,7 @@ import java.util.ArrayList;
  * @author Dacharat Pankong
  *
  */
-public class Coin implements Comparable<Valuable>, Valuable {
-
-	private double value;
-	private String currency;
+public class Coin extends Money  {
 
 	/**
 	 * Create a coin with value
@@ -20,11 +17,7 @@ public class Coin implements Comparable<Valuable>, Valuable {
 	 */
 	public Coin(double value) {
 
-		if (value >= 0) {
-			this.value = value;
-		} else {
-			this.value = 0;
-		}
+		super(value, "Baht");
 	}
 
 	/**
@@ -35,42 +28,8 @@ public class Coin implements Comparable<Valuable>, Valuable {
 	 */
 	public Coin(double value, String currency) {
 
-		if (value >= 0) {
-			this.value = value;
-		} else {
-			this.value = 0;
-		}
-		this.currency = currency;
+		super(value, currency);
 	}	
-	
-	/**
-	 * check coin that they are equal or not
-	 * 
-	 * @return true if they are same.
-	 * 			false if they are not same.
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (obj.getClass() != this.getClass()) {
-			return false;
-		}
-		Coin other = (Coin) obj;
-		return other.getValue() == this.getValue() && other.getCurrency().equals(this.getCurrency());
-
-	}
-
-	/**
-	 * Compare value of coin
-	 * 
-	 */
-	@Override
-	public int compareTo(Valuable coin) {
-
-		return (int) Math.signum(this.getValue() - coin.getValue());
-	}
 
 	/**
 	 * toString returns a string description of coin.
@@ -78,28 +37,6 @@ public class Coin implements Comparable<Valuable>, Valuable {
 	@Override
 	public String toString() {
 		return String.format("%f - %s", value, currency);
-	}
-
-
-	/**
-	 * return value of money
-	 *  
-	 * @return value of money
-	 */
-	@Override
-	public double getValue() {
-		return value;
-	}
-
-
-	/**
-	 * return currency of money
-	 * 
-	 * @return currency of money
-	 */
-	@Override
-	public String getCurrency() {
-		return currency;
 	}
 
 }

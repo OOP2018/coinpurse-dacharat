@@ -6,11 +6,9 @@ package coinpurse;
  * @author Dacharat Pankong
  *
  */
-public class BankNote implements Valuable {
+public class BankNote extends Money  {
 
 	private static long nextSerialNumber = 1000000;
-	private double value;
-	private String currency;
 	private long serialNumber;
 	
 	/**
@@ -21,25 +19,8 @@ public class BankNote implements Valuable {
 	 */
 	public BankNote(double value, String currency) {
 
-		this.value = value;
-		this.currency = currency;
+		super(value, currency);
 		this.serialNumber = nextSerialNumber++;
-	}
-
-	/**
-	 * Return value of banknote.
-	 */
-	@Override
-	public double getValue() {
-		return value;
-	}
-
-	/**
-	 * Return currency of banknote.
-	 */
-	@Override
-	public String getCurrency() {
-		return currency;
 	}
 
 	/**
@@ -49,19 +30,6 @@ public class BankNote implements Valuable {
 	 */
 	public long getSerial() {
 		return serialNumber;
-	}
-
-	/**
-	 * Check banknote that they are equal or not.
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (obj == null)
-			return false;
-		if (obj.getClass() != this.getClass())
-			return false;
-		BankNote other = (BankNote) obj;
-		return this.value == other.value && this.currency.equalsIgnoreCase(other.getCurrency());
 	}
 
 	/**

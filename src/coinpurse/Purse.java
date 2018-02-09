@@ -19,7 +19,6 @@ public class Purse {
 	private List<Valuable> money;
 	private Comparator<Valuable> com = new ValueComparator();
 
-
 	/**
 	 * Capacity is maximum number of items the purse can hold. Capacity is set when
 	 * the purse is created and cannot be changed.
@@ -54,8 +53,8 @@ public class Purse {
 	 */
 	public double getBalance() {
 		double balance = 0;
-		for (Valuable c : money) {
-			balance += c.getValue();
+		for (Valuable v : money) {
+			balance += v.getValue();
 		}
 		return balance;
 	}
@@ -80,17 +79,17 @@ public class Purse {
 	}
 
 	/**
-	 * Insert a coin or banknote into the purse. The money is only inserted if the purse has
-	 * space for it and the money has positive value. No worthless coins!
+	 * Insert a coin or banknote into the purse. The money is only inserted if the
+	 * purse has space for it and the money has positive value. No worthless coins!
 	 * 
-	 * @param coin
+	 * @param value
 	 *            is a Coin or Banknote object to insert into purse
 	 * @return true if coin inserted, false if can't insert
 	 */
-	public boolean insert(Valuable coin) {
+	public boolean insert(Valuable value) {
 		// if the purse is already full then can't insert anything.
-		if (!isFull() && coin.getValue() > 0) {
-			money.add(coin);
+		if (!isFull() && value.getValue() > 0) {
+			money.add(value);
 			return true;
 		}
 		return false;
@@ -102,7 +101,7 @@ public class Purse {
 	 * 
 	 * @param amount
 	 *            is the amount to withdraw
-	 * @return array of Coin objects for money withdrawn, or null if cannot withdraw
+	 * @return array of Money objects for money withdrawn, or null if cannot withdraw
 	 *         requested amount.
 	 */
 	public Valuable[] withdraw(double amount) {
@@ -118,27 +117,39 @@ public class Purse {
 		 * and return the temporary list (as an array).
 		 */
 
-		List<Valuable> tempList = new ArrayList<Valuable>();
-		double amountNeededToWithdraw = amount;
+		Money m = new Money(amount,	"Baht");
+		return withdraw(m);
 		
-		if (amountNeededToWithdraw < 0) {
+	}
+
+	/**
+	 * Withdraw the amount, using only items that have the same currency as the
+	 * parameter(amount). Amount must not be null and amount.getValue() > 0;
+	 * 
+	 * @param amount is the amount to withdraw with same currency.
+	 * @return array of Money objects for money withdrawn, or null if cannot withdraw
+	 *         requested amount.
+	 */
+	public Valuable[] withdraw(Valuable amount) {
+
+		List<Valuable> tempList = new ArrayList<Valuable>();
+		double amountNeededToWithdraw = amount.getValue();
+
+		if (amount == null || amountNeededToWithdraw <= 0)
 			return null;
-		}
-		if (amountNeededToWithdraw != 0) {
+		else {
 			Collections.sort(money, com);
 			Collections.reverse(money);
-			for (Valuable c : money) {
-				if (amountNeededToWithdraw >= c.getValue()) {
-					tempList.add(c);
-					amountNeededToWithdraw = amountNeededToWithdraw - c.getValue();
+			for (Valuable v : money) {
+				if (amountNeededToWithdraw >= v.getValue() && amount.getCurrency().equals(v.getCurrency())) {
+					tempList.add(v);
+					amountNeededToWithdraw = amountNeededToWithdraw - v.getValue();
 				}
 			}
-
 		}
-
 		if (amountNeededToWithdraw == 0) {
-			for (Valuable c : tempList) {
-				money.remove(c);
+			for (Valuable v : tempList) {
+				money.remove(v);
 			}
 			Valuable[] array = new Valuable[tempList.size()];
 			tempList.toArray(array);
