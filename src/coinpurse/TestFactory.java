@@ -23,14 +23,19 @@ public class TestFactory {
 		else
 			MoneyFactory.setMoneyFactory(factory);
 		// get a "10" Baht, Ringgit, or whatever
+		factory = MoneyFactory.getInstance();
 		Purse p = new Purse(5);
-		p.insert(factory.createMoney(10));
+		p.insert(factory.createMoney(0.250));
 		p.insert(factory.createMoney(1));
 		p.insert(factory.createMoney(50));
-		p.insert(factory.createMoney(5));
+		p.insert(factory.createMoney(0.5));
 		p.insert(factory.createMoney(20));
-		for(Valuable v : p.getMoney()) {
+		for (Valuable v : p.getMoney()) {
 			System.out.println(v);
+		}
+		System.out.println("====================================");
+		for (Valuable v : p.getMoney()) {
+			System.out.println(v.getCurrency());
 		}
 
 	}

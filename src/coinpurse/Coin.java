@@ -10,6 +10,8 @@ import java.util.ArrayList;
  */
 public class Coin extends Money {
 
+	private String outputCurrency;
+
 	/**
 	 * Create a coin with value
 	 * 
@@ -19,6 +21,7 @@ public class Coin extends Money {
 	public Coin(double value) {
 
 		super(value, "Baht");
+		this.outputCurrency = "Baht";
 	}
 
 	/**
@@ -32,6 +35,22 @@ public class Coin extends Money {
 	public Coin(double value, String currency) {
 
 		super(value, currency);
+		this.outputCurrency = currency;
+	}
+
+	/**
+	 * Create a coin with value, currency and if you want to make output currency in
+	 * other currency but in same country, you can add outputCurrency for make it
+	 * output the currency that you want.(Ex. In thai have "Satang" currency for
+	 * money that have value < 1 baht)
+	 * 
+	 * @param value
+	 * @param currency
+	 * @param outputCurrency
+	 */
+	public Coin(double value, String currency, String outputCurrency) {
+		super(value, currency);
+		this.outputCurrency = outputCurrency;
 	}
 
 	/**
@@ -39,9 +58,9 @@ public class Coin extends Money {
 	 */
 	@Override
 	public String toString() {
-		if (currency.equals("Ringgit"))
-			return String.format("%.2f - %s coin", value * 100, "Sen");
-		return String.format("%.2f - %s coin", value, currency);
+		if (currency.equalsIgnoreCase(outputCurrency))
+			return String.format("%.2f - %s coin", value, currency);
+		return String.format("%.2f - %s coin", value * 100, outputCurrency);
 	}
 
 }
