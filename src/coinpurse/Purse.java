@@ -9,7 +9,7 @@ import java.util.List;
 // You will use Collections.sort() to sort the coins
 
 /**
- * A coin purse contains coins. You can insert coins, withdraw money, check the
+ * A coin purse contains money. You can insert money, withdraw money, check the
  * balance, and check if the purse is full.
  * 
  * @author Dacharat Pankong
@@ -18,6 +18,7 @@ public class Purse {
 	/** Collection of objects in the purse. */
 	private List<Valuable> money;
 	private Comparator<Valuable> com = new ValueComparator();
+	private final String DEFAULT_CURRENCY = "Baht";
 
 	/**
 	 * Capacity is maximum number of items the purse can hold. Capacity is set when
@@ -117,7 +118,7 @@ public class Purse {
 		 * and return the temporary list (as an array).
 		 */
 
-		Money m = new Money(amount,	"Baht");
+		Money m = new Money(amount,	DEFAULT_CURRENCY);
 		return withdraw(m);
 		
 	}
@@ -167,7 +168,7 @@ public class Purse {
 	 * whatever is a useful description.
 	 */
 	public String toString() {
-		return count() + " coins with value " + getBalance();
+		return count() + " money capacity with value " + getBalance();
 	}
 
 }
