@@ -14,7 +14,7 @@ public abstract class MoneyFactory {
 	/**
 	 * Constructor for MoneyFactory.
 	 */
-	public MoneyFactory() {
+	protected MoneyFactory() {
 
 	}
 
