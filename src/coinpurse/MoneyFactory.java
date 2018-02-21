@@ -8,7 +8,7 @@ package coinpurse;
  */
 public abstract class MoneyFactory {
 
-	private static MoneyFactory factory = null;
+	private static MoneyFactory factory = new ThaiMoneyFactory();
 	protected static long nextSerialNumber = 1000000;
 
 	/**
@@ -55,8 +55,8 @@ public abstract class MoneyFactory {
 		double values = 0;
 		try {
 			values = Double.parseDouble(value);
-		} catch (IllegalArgumentException e) {
-			System.out.println("Sorry, " + value + " is not a valid amount.");
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException("Can't cast " + value + " to double.");
 		}
 		return this.createMoney(values);
 	}
