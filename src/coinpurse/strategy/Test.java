@@ -9,6 +9,12 @@ import coinpurse.MoneyFactory;
 import coinpurse.ThaiMoneyFactory;
 import coinpurse.Valuable;
 
+/**
+ * Test withdraw strategy in main.
+ * 
+ * @author Dacharat Pankong
+ * 
+ */
 public class Test {
 
 	public static void main(String[] args) {

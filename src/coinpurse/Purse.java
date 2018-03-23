@@ -1,6 +1,8 @@
 package coinpurse;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import coinpurse.strategy.GreedyWithdraw;
@@ -17,7 +19,7 @@ import coinpurse.strategy.WithdrawStrategy;
 public class Purse {
 	/** Collection of objects in the purse. */
 	private List<Valuable> money;
-//	private Comparator<Valuable> com = new ValueComparator();
+	private Comparator<Valuable> com = new ValueComparator();
 	private final String DEFAULT_CURRENCY = "Baht";
 	private WithdrawStrategy strategy;
 
@@ -37,7 +39,7 @@ public class Purse {
 		this.capacity = capacity;
 		money = new ArrayList<Valuable>();
 		strategy = new GreedyWithdraw();
-//		strategy = new RecursiveWithdraw();
+		// strategy = new RecursiveWithdraw();
 	}
 
 	/**
@@ -137,18 +139,21 @@ public class Purse {
 	 */
 	public Valuable[] withdraw(Valuable amount) {
 
-		if (amount.getValue() < 0 || money == null)
+		if (amount.getValue() < 0 || money.size() == 0)
 			return null;
-		
+		Collections.sort(money, com);
+		Collections.reverse(money);
 		List<Valuable> withdraw = strategy.withdraw(amount, money);
+		if (withdraw != null) {
+			for (Valuable v : withdraw) {
+				money.remove(v);
+			}
 
-		for (Valuable v : withdraw) {
-			money.remove(v);
+			Valuable[] array = new Valuable[withdraw.size()];
+			withdraw.toArray(array);
+			return array;
 		}
-		
-		Valuable[] array = new Valuable[withdraw.size()];
-		withdraw.toArray(array);
-		return array;
+		return null;
 	}
 
 	/**
@@ -161,9 +166,10 @@ public class Purse {
 	}
 
 	/**
-	 * 
+	 * Set withdraw strategy.
 	 * 
 	 * @param strategy
+	 *            to be set.
 	 */
 	public void setStrategy(WithdrawStrategy strategy) {
 		this.strategy = strategy;
